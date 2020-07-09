@@ -2,6 +2,7 @@ package com.example.springchaos.domain;
 
 import lombok.Getter;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -11,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 public class DomainImpl implements Domain {
 
     @Id
+    @GeneratedValue
     private Long id;
 
 }
