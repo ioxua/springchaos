@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -56,13 +57,18 @@ class SubQueryOrderByTests {
 	}
 
 	@Test
+	@Transactional
 	void todoGroupOrderByReturnsOk() {
-		createTodosAndGroups();
+//		createTodosAndGroups();
 
 		List<TodoGroup> orderedGroups = todoGroupRepository.findTodoGroupsOrderBySize();
-		assertThat(orderedGroups.get(0).getName()).isEqualTo("B");
+		for (int i = 0; i < orderedGroups.size(); i++) {
+			System.out.println(orderedGroups.get(i).getName());
+			System.out.println(orderedGroups.get(i).getTodos().size());
+		}
+		assertThat(orderedGroups.get(0).getName()).isEqualTo("A");
 		assertThat(orderedGroups.get(1).getName()).isEqualTo("C");
-		assertThat(orderedGroups.get(2).getName()).isEqualTo("A");
+		assertThat(orderedGroups.get(2).getName()).isEqualTo("B");
 	}
 
 }
